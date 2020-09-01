@@ -12,8 +12,6 @@ import Activate from "./pages/activate";
 import CreateChampionships from "./pages/create-championships";
 import Championships from "./pages/championships";
 import SettingPassword from "./pages/setting-password";
-import Products from "./pages/products";
-//import Pending from "./pages/group-members";
 
 import Menu from "./components/menu";
 
