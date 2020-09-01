@@ -1,0 +1,48 @@
+scalar Upload
+scalar JSON
+
+type User {
+  user_id: ID!
+  name: String
+  email: String
+  phone: String
+  password: String
+  role: String
+  description: String
+  status: String
+  token_last_session: String
+  token: String
+  created_at: String
+  updated_at: String
+}
+
+input UserInput {
+  name: String
+  email: String
+  phone: String
+  password: String
+  role: String
+  description: String
+}
+
+type Query {
+  "Return all users "
+  getUsers: [User]
+  "Login user"
+  LoginUser(variables: JSON!): User
+}
+
+type Mutation {
+  "Create a user"
+  createUser(input: UserInput!): User
+  "Signup"
+  signupUser(input: UserInput!): User
+  "Activate to user"
+  activateUser(variables: JSON!): User
+  "update user password"
+  updateUserPassword(variables: JSON!): Boolean
+  "Upload team from CSV"
+  createUsersCSV(file: Upload!): [User]
+  "update user"
+  updateUser(input: UserInput!): Boolean
+}

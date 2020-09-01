@@ -1,0 +1,90 @@
+#container_wish_list
+    display: flex
+    align-items: center
+    justify-content: center
+    .products
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+        justify-content: space-evenly
+        width: 850px
+        .item
+            display: flex
+            flex-direction: row
+            border: solid 1px #888
+            // width: 200px
+            .item-image
+                background-image: url(https://via.placeholder.com/80x80/EEE/AAA)
+                background-repeat: no-repeat
+                background-position: center
+                border: solid 2px #888
+                height: 160px
+                width: 200px
+            .item-detail
+                background-color: #EEE
+                display: flex
+                justify-content: center
+                text-align: center
+                height: 160px
+                width: 180px
+// data complete 
+#container_data_complete
+    display: flex
+    align-items: center
+    // height: 260px
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: center
+    margin: 1vh auto
+    // max-width: 280px
+
+#container_primary_image
+    background-image: url(https://via.placeholder.com/32x32/EEE/AAA)
+    height: 280px
+    width: 280px
+    img
+        height: 280px
+        width: 280px
+#container_primary_form
+    // background-color: #DADADA
+    display: flex
+    align-items: center
+    // height: 260px
+    flex-direction: column
+    justify-content: center
+
+    .content-fields
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+        justify-content: center
+        align-items: center
+        .field
+            // border: solid 1px #CCC
+            flex-grow: 1
+            padding: 0 1vh
+            min-width: 280px
+
+#container_form
+    // background-color: #DADADA
+    display: flex
+    align-items: center
+    // height: 260px
+    flex-direction: column
+    justify-content: center
+    max-width: 300px
+    .field
+        // border: solid 1px #CCC
+        flex-grow: 1
+        padding: 0.5vh 1vh
+        min-width: 280px
+    .container-copy
+        text-align: center
+
+@media only screen and  (max-width: 600px)
+    #container-product .product-item .details-product
+        flex-direction: column
+
+@media only screen and  (max-width: 400px)
+    #container-product .product-item .details-product
+        flex-direction: column

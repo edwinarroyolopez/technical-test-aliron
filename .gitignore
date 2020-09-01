@@ -1,0 +1,28 @@
+### Root ###
+node_modules/
+
+### Server ###
+server/node_modules/
+server/package-lock.json
+server/src/public/images/*
+
+server/.env
+server/.env.dev
+server/.env.test
+
+### Web ###
+web/node_modules/
+web/build/
+web/package-lock.json
+
+
+# Sass #
+.sass-cache/
+# *.css
+web/src/assets/sass/*.css
+
+#vscode
+.vscode/
+
+#keys
+#*_key.json

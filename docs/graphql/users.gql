@@ -1,0 +1,69 @@
+## CREATE USER
+## Register with email and phone
+##
+mutation {
+  createUser(
+    input: {
+      email: "ed@gmail.com"
+      password: "abcd.1234"
+      name: "Ed"
+      role: "1"
+      phone: "3016453021"
+      description: "I'm a programmer!"
+    }
+  ) {
+    user_id
+    email
+    password
+    name
+    phone
+    description
+  }
+}
+
+
+## LOGIN
+{
+  user: LoginUser(variables:{
+   email: "ed@gmail.com", password: "abcd.1234"
+  })
+ {
+  	user_id
+    email
+    password
+    name
+    phone
+    description
+  	token
+  }
+}
+
+
+
+## Get Users
+{
+  users: getUsers {
+    email
+    password
+    name
+    phone
+    description
+  }
+}
+
+
+## ACTIVATE USER
+mutation{
+  user: activateUser(variables:{
+   user_id: "13", confirmationCode: "123456"
+  })
+ {
+  	user_id
+    email
+    password
+    name
+    phone
+    description
+  	token
+  }
+}

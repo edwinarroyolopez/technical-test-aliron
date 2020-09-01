@@ -1,0 +1,221 @@
+  scalar JSON
+  scalar Date
+
+  type Property {
+    id: ID!
+    id_gestion: String
+    tag: String
+    property_type: String
+    title_description: String
+    price: String
+    area: String
+    bedrooms: String
+    bathrooms: String
+    garages: String
+    phone: String
+    whatsapp: String
+    location: String
+    area_builded: String
+    price_m2: String
+    stratum: String
+    status: String
+    building_administration: String
+    old: String
+    antiquity: String
+    floor_number: String
+    neighborhood: String
+    images: JSON
+    code_source: String
+    description: String
+    internal_features: String
+    external_features: String
+    neighborhood_features: String
+    link_source: String
+    source: String
+    management: Int
+    text: String
+    city: String
+    publication_date: String
+    last_publication_date: String
+    views: String
+    source_code: String
+    owner: String
+    wsp_contacted: JSON
+    sms_contacted: JSON
+    owner_data: JSON
+    history_management: JSON
+    management_id: String
+    user_id: String
+    created_at: Date
+    updated_at: Date
+  }
+
+  input PropertyInput {
+       id_gestion: String
+    tag: String
+    property_type: String
+    title_description: String
+    price: String
+    area: String
+    bedrooms: String
+    bathrooms: String
+    garages: String
+    phone: String
+    whatsapp: String
+    location: String
+    area_builded: String
+    price_m2: String
+    stratum: String
+    status: String
+    building_administration: String
+    old: String
+    antiquity: String
+    floor_number: String
+    neighborhood: String
+    images: JSON
+    code_source: String
+    description: String
+    internal_features: String
+    external_features: String
+    neighborhood_features: String
+    link_source: String
+    source: String
+    management: Int
+    text: String
+    city: String
+    publication_date: String
+    last_publication_date: String
+    views: String
+    source_code: String
+    owner: String
+    wsp_contacted: JSON
+    sms_contacted: JSON
+    owner_data: JSON
+    history_management: JSON
+    management_id: String
+    user_id: String
+    created_at: Date
+    updated_at: Date
+  }
+  
+  input PropertyInputUpdate {
+    id: ID!
+    id_gestion: String
+    tag: String
+    property_type: String
+    title_description: String
+    price: String
+    area: String
+    bedrooms: String
+    bathrooms: String
+    garages: String
+    phone: String
+    whatsapp: String
+    location: String
+    area_builded: String
+    price_m2: String
+    stratum: String
+    status: String
+    building_administration: String
+    old: String
+    antiquity: String
+    floor_number: String
+    neighborhood: String
+    images: JSON
+    code_source: String
+    description: String
+    internal_features: String
+    external_features: String
+    neighborhood_features: String
+    link_source: String
+    source: String
+    management: Int
+    text: String
+    city: String
+    publication_date: String
+    last_publication_date: String
+    views: String
+    source_code: String
+    owner: String
+    wsp_contacted: JSON
+    sms_contacted: JSON
+    owner_data: JSON
+    history_management: JSON
+    management_id: String
+    user_id: String
+    created_at: Date
+    updated_at: Date
+  }
+
+    type DataProperties{
+      registros: Int
+      sin_gestionar: Int
+      en_gestion: Int
+      no_util: Int
+      util: Int
+      bogota: Int
+      medellin: Int
+      cartagena: Int
+      barranquilla: Int
+    }
+
+
+
+  type FincaRaizNotification {
+    id: ID!
+    message: String # new
+    channel: String
+    phone: String # doubt
+    email: String # doubt
+    product_id: String # title_description
+    link_short_message: String
+    link_message: String
+    token_message: String
+    source: String
+    link_source: String
+    status: Int # new
+    user_id: String
+    created_at: Date
+    updated_at: Date
+  }
+
+  input FincaRaizNotificationInput {
+    message: String # 
+    phone: String # 
+    email: String # 
+    id: String # 
+    link_source: String
+    status: Int # new
+    user_id: String
+  }
+
+        
+  type Query {
+    "Return detail Property of Laika store"
+    getPropertyFromFincaRaiz(slug: String!): Property
+    "Return all properties from Finca Raíz"
+    getPropertiesFromFincaRaiz(variables: JSON): [Property]
+    "Scraping properties from Finca Raíz site"
+    scrapPropertiesFromFincaRaiz: [Property]
+    "Return all data statitics to properties from Finca Raíz"
+    getDataPropertiesFromFincaRaiz: [DataProperties]
+    "Return all properties with key text"
+    scrapPropertiesFromFincaRaiz(variables: JSON): [Property]
+    "Verify if row already touched by a different user"
+    verifyIfTouchedRowByDifferentUser(variables: JSON): Boolean
+  }
+
+  type Mutation {
+    "Update a property in Finca Raiz db"
+    updatePropertyFincaRaiz(input: PropertyInputUpdate!): Property
+    "Update status a property in Finca Raiz db"
+    updateStatusPropertyFincaRaiz(variables: JSON!): Boolean
+    "Send message to Activate user"
+    sendSmsIteration(input: FincaRaizNotificationInput): Boolean
+    "Complete data about the property  "
+    completePropertyFincaRaiz(variables: JSON!): Boolean
+    "Register a whatsapp iteration"
+    sendWhatsappIteration(variables: JSON!): Boolean
+
+    
+  }

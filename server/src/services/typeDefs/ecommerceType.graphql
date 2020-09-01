@@ -1,0 +1,40 @@
+scalar JSON
+
+type Ecommerce {
+  service_id: ID!
+  email: String
+  petname: String
+  specie: String
+  breeds: String
+  age: String
+  weight: String
+  size: String
+  service: String
+  data: JSON
+  status: String
+  created_at: String
+  updated_at: String
+}
+
+input EcommerceInput {
+  email: String
+  petname: String
+  specie: String
+  breeds: String
+  age: String
+  weight: String
+  size: String
+  service: String
+  data: JSON
+  status: String
+}
+
+type Query {
+  "Return all rows"
+  getEcommerceRows: [Ecommerce]
+}
+
+type Mutation {
+  "Create an row ecommerce"
+  createEcommerceRow(input: EcommerceInput): Ecommerce
+}

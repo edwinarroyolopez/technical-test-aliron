@@ -1,0 +1,123 @@
+## create ecommerce row
+mutation{
+  createEcommerceRow(input:{
+    email:"mmm"
+    petname:"mmm"
+    specie:"mmm"
+    breeds:"mmm"
+    age:"mmm"
+    weight:"mmm"
+    size:"mmm"
+    service:"mmm"
+    data:"mmm"
+    status:"mmm"
+  }) {
+    email
+    petname
+    specie
+    breeds
+    age
+    weight
+    size
+    service
+    data
+    status
+  }
+}
+
+
+
+## create assistance row
+mutation{
+  createAssistance(input:{
+    fullname: "mmm"
+    phone: "mmm"
+    email: "mmm"
+    petname: "mmm"
+    specie: "mmm"
+    breeds: "mmm"
+    observations: "mmm"
+  }) {
+    fullname
+    phone
+    email
+    petname
+    specie
+    breeds
+    observations
+  }
+}
+
+## Ecommerce rows
+{
+  ecommerce: getEcommerceRows{
+    email
+    petname
+    specie
+    breeds
+    age
+    weight
+    size
+    service
+    data
+    status
+  }
+}
+
+
+## Assistance rows
+{
+  assistances:getAssistances{
+    fullname
+    phone
+    email
+    petname
+    specie
+    breeds
+    observations
+  }
+}
+
+
+############# VERIFY
+
+
+{
+  verify: verifyIfTouchedRowByDifferentUser(variables:{
+   	id: "6451"
+    user_idIn: "1"
+  })
+}
+
+############# RETURN Boolean
+{
+  "data": {
+    "verify": false
+  }
+}
+
+
+#########registerWhatsappIterationProperty
+
+ mutation{
+   completePropertyFincaRaiz(data:{
+     property_id: "mmm"
+     channel: "mmm"
+     fullname: "mmm"
+     phone: "mmm"
+     email: "mmm"
+     property_type: "mmm"
+     neighborhood: "mmm"
+     price: "mmm"
+     city: "mmm"
+     observations: "mmm"
+     id_gestion: "mmm"
+   }) {
+     id_gestion
+     source
+     text
+     status
+     created_at
+     updated_at
+   }
+ }
