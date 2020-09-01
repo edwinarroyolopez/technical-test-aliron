@@ -59,14 +59,6 @@ SELECT * FROM  game.code_sms_sessions
 
 
 
-game.activation_code (
-        user_id,
-        code,
-        status,
-        created_at,
-        updated_at
-
-
 
 
 -- ACTIVATION CODE
