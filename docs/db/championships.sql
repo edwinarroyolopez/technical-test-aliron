@@ -21,7 +21,6 @@ create table game.championships
     award       text,              
     start_date       text,
     end_date       text,
-    phone       text,
     status       smallint default 0,
     created_at  timestamp default current_timestamp,
     updated_at  timestamp default current_timestamp

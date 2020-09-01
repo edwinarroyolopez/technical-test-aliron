@@ -225,7 +225,7 @@ const Menu = ({ handleOpen, setOpenModal }: any) => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography className={classes.atutomatic} variant="h6" noWrap>
+            <Typography className={classes.atutomatic} variant="subtitle1" noWrap>
               {dataAuth.role === "1" ? "Admin: " : "Player: "} {dataAuth.name}
             </Typography>
             <div style={{ padding: "0px 10px", color: "#b0b3b8" }}>

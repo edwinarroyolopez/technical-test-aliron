@@ -1,0 +1,35 @@
+scalar JSON
+
+type Championship {
+  championship_id: ID!
+  user_id: String
+  title: String
+  teams_quantity: String
+  award: String
+  start_date: String
+  end_date: String
+  status: String
+  created_at: String
+  updated_at: String
+}
+
+input ChampionshipInput {
+  user_id: String
+  title: String
+  teams_quantity: String
+  award: String
+  start_date: String
+  end_date: String
+}
+
+type Query {
+  "Return all Championships"
+  getChampionships(variables: JSON): [Championship]
+}
+
+type Mutation {
+  "Create a Championship"
+  createChampionship(input: ChampionshipInput!): Championship
+  "update Championship"
+  updateChampionship(variables: JSON!): Championship
+}

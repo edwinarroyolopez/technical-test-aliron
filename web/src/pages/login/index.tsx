@@ -121,7 +121,6 @@ const Login = ({ history, onLoggedChange }: any) => {
           setTimeout(() => {
             onLoggedChange(true);
             history.push(HOME);
-            //window.location.href = "/";
           }, 400);
         }
       } catch (error) {

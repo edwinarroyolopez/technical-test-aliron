@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { useMutation } from "@apollo/react-hooks";
 import moment from "moment";
 
 import {
@@ -6,13 +8,8 @@ import {
   TextField,
   Button,
   ThemeProvider,
-  IconButton,
   CardHeader,
 } from "@material-ui/core";
-
-import CancelIcon from "@material-ui/icons/Cancel";
-import ClearIcon from "@material-ui/icons/Clear";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 
@@ -23,6 +20,9 @@ import {
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers/";
 
+import { CREATE_CHAMPIONSHIP } from "../../graphql/mutation/championship.mutation";
+import { CHAMPIONSHIPS } from "../../routes";
+
 import {
   existsAuthCookie,
   getTokenAuthCookie,
@@ -31,8 +31,6 @@ import { TeamsQuantity, Awards } from "../../data/data";
 import GameContext from "../../context/game.context";
 
 import theme2 from "../../assets/theme/themeconfig";
-
-//import "../../assets/sass/properties.sass";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -73,23 +71,26 @@ if (existsAuthCookie()) {
 }
 
 const CreateChampionship = () => {
+  const [createChampionship] = useMutation(CREATE_CHAMPIONSHIP);
   // const [state, setState] = useState<{ [key: string]: any }>({});
   const { state, dispatch } = useContext(GameContext);
   const [data, setData] = useState<{
     user_id: string;
-    startDate: string;
-    endDate: string;
+    start_date: string;
+    end_date: string;
     title: string;
-    teamsQuantity: string;
+    teams_quantity: string;
     award: string;
   }>({
     user_id: user_id,
-    startDate: today,
-    endDate: today,
+    start_date: today,
+    end_date: today,
     title: "",
-    teamsQuantity: "",
-    award: ""
+    teams_quantity: "",
+    award: "",
   });
+
+  const history = useHistory();
 
   useEffect(() => {
     console.log("context - state: ", state);
@@ -105,24 +106,53 @@ const CreateChampionship = () => {
   };
 
   const handleSubmit = async () => {
-    const { user_id, startDate, endDate, title, teamsQuantity, award } = data;
+    const {
+      user_id,
+      start_date,
+      end_date,
+      title,
+      teams_quantity,
+      award,
+    } = data;
 
     console.log("data: ", data);
 
-    if (user_id === "" || teamsQuantity === "") {
+    if (
+      user_id === "" ||
+      start_date === "" ||
+      end_date === "" ||
+      title === "" ||
+      award === "" ||
+      teams_quantity === ""
+    ) {
       alert(`Es necesario que llenes todos los campos`);
     } else {
       try {
-        // const {
-        //   data: { user },
-        // } = await Login({
-        //   variables: { email, phone, password, code },
-        // });
-        // console.log("user: ", user);
-        //        dispatch({ type: "LOGIN", user });
+        const {
+          data: { championship: championshipCreated },
+        } = await createChampionship({
+          variables: {
+            championship: {
+              user_id,
+              start_date,
+              end_date,
+              title,
+              teams_quantity,
+              award,
+            },
+          },
+        });
+
+        console.log("championshipCreated: ", championshipCreated);
+
+        if (championshipCreated) {
+          alert(`Campeonato creado correctamente`);
+          history.push(CHAMPIONSHIPS);
+        }
       } catch (error) {
         console.error({ error });
-        alert(error.message);
+        let message = error.message.replace("GraphQL error:", "");
+        alert(message);
       }
     }
   };
@@ -151,8 +181,8 @@ const CreateChampionship = () => {
               <Field
                 label="Cantidad de equipos"
                 options={TeamsQuantity}
-                value={data.teamsQuantity}
-                onChange={handleDataChange("teamsQuantity")}
+                value={data.teams_quantity}
+                onChange={handleDataChange("teams_quantity")}
               />
             </div>
           </div>
@@ -175,8 +205,8 @@ const CreateChampionship = () => {
                   margin="normal"
                   format="dd/MM/yyyy"
                   label="Fecha de inicio"
-                  value={data.startDate}
-                  onChange={handleDateChange("startDate")}
+                  value={data.start_date}
+                  onChange={handleDateChange("start_date")}
                   KeyboardButtonProps={{
                     "aria-label": "change date",
                   }}
@@ -190,8 +220,8 @@ const CreateChampionship = () => {
                   margin="normal"
                   format="dd/MM/yyyy"
                   label="Fecha de finalización"
-                  value={data.endDate}
-                  onChange={handleDateChange("endDate")}
+                  value={data.end_date}
+                  onChange={handleDateChange("end_date")}
                   KeyboardButtonProps={{
                     "aria-label": "change date",
                   }}
@@ -231,8 +261,8 @@ const Field = ({ children, type, label, value, options, onChange }: any) => {
         InputProps={{
           classes: { input: classes.input },
         }}
-        onFocus={() => { }}
-        onBlur={() => { }}
+        onFocus={() => {}}
+        onBlur={() => {}}
         onChange={onChange}
       />
     );
