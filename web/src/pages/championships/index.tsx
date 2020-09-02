@@ -129,10 +129,10 @@ const Championship = () => {
                           />
                         ))
                       ) : (
-                          <div className="no-data">
-                            No existen campeonatos creados.
-                          </div>
-                        )}
+                        <div className="no-data">
+                          No existen campeonatos creados.
+                        </div>
+                      )}
                     </TableBody>
                   </Table>
                 </TableContainer>
@@ -190,7 +190,12 @@ function Row({ row, handleClick }: any) {
           </Button>
         </TableCell>
       </TableRow>
-      <Modal open={open} onClose={() => { }}>
+      <Modal
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+      >
         <Complete detail={row} />
       </Modal>
     </>

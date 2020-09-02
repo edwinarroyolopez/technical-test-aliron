@@ -90,6 +90,8 @@ const CreateChampionship = () => {
     award: "",
   });
 
+  console.log('user_id: ', user_id)
+
   const history = useHistory();
 
   useEffect(() => {

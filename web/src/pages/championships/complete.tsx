@@ -57,7 +57,14 @@ const Complete: React.SFC<{
 }> = ({ detail, refresh }) => {
   const classes = useStyles();
 
-  const handleSendMessage = async () => { };
+  const [teams, setTeams] = useState<{ [key: string]: any }>([]);
+  // const [state, setState] = useState<{ [key: string]: any }>(owner_data);
+
+  const handleSendMessage = async () => {};
+
+  const handleInputChange = (key: string) => ({ target: { value } }: any) => {
+    setTeams({ ...teams, [key]: value });
+  };
 
   return (
     <>
@@ -118,12 +125,18 @@ const Complete: React.SFC<{
                     }}
                   >
                     {[...Array(parseInt(detail.teams_quantity))].map((e, i) => (
-                      <FieldTeam key={i}>{i}</FieldTeam>
+                      <FieldTeam
+                        value={teams[`player_${i}`]}
+                        onChange={handleInputChange(`player_${i}`)}
+                        key={i}
+                      >
+                        {i}
+                      </FieldTeam>
                     ))}
                   </div>
                 ) : null}
                 <Button
-                  // onClick={handleOpenComplete}
+                  onClick={()=> {console.log('teams: ', teams)}}
                   color="primary"
                   startIcon={<PlayCircleFilledWhiteIcon />}
                 >
@@ -152,7 +165,7 @@ const Item = ({ children, title, description }: any) => (
   </div>
 );
 
-const FieldTeam = ({ children, title, description }: any) => (
+const FieldTeam = ({ children, title, description, value, onChange }: any) => (
   <div className="container_field_team" style={{ maxWidth: "20em" }}>
     Equipo: {children}
     <div
@@ -163,8 +176,8 @@ const FieldTeam = ({ children, title, description }: any) => (
         <Field
           type="input"
           label="Jugador"
-          value={""}
-        // onChange={handleDataChange("title")}
+          value={value ? value : ""}
+          onChange={onChange}
         />
       </div>
       <br />
@@ -173,7 +186,7 @@ const FieldTeam = ({ children, title, description }: any) => (
           type="input"
           label="Email"
           value={""}
-        // onChange={handleDataChange("title")}
+          // onChange={handleDataChange("title")}
         />
       </div>
       <Button
@@ -206,8 +219,8 @@ const Field = ({ children, type, label, value, options, onChange }: any) => {
         InputProps={{
           classes: { input: classes.input },
         }}
-        onFocus={() => { }}
-        onBlur={() => { }}
+        onFocus={() => {}}
+        onBlur={() => {}}
         onChange={onChange}
       />
     );
